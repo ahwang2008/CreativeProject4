@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css"/>
+    <title>Shopping List</title>
+  </head>
+  <body>
+    <div id="app">
+      
+      <div>
+          <h1>Mario's Shopping Kart
+          <img src="http://windows7themes.net/wallpaper_large/mario-kart-7-wallpaper-3.jpg" height="50px" width="50px"></h1>
+          <pre class="tab">Item:                   Store:                 Quantity:</pre>
+          <p style="float:right;"><img src="https://emojipedia-us.s3.amazonaws.com/thumbs/160/emojidex/107/shopping-trolley_1f6d2.png" height="400px" width="400px"></p>
+      </div>
+
+      <form v-on:submit.prevent="addItem">
+  <input type="text" v-model="text">
+  <input type="text" v-model="text1">
+  <input type="number" v-model="priority" min = "1" max = "50">
+  <button type="submit">Add</button>
+  <p v-show="activeItems.length === 0">You're Shopping Kart is empty! Maybe stock up on some bananas?
+      <img src="https://vignette.wikia.nocookie.net/mariokart/images/b/b6/Triple_Bananas_Artwork_-_Mario_Kart_Wii.png/revision/latest?cb=20170323003819" align="middle" height = "50px" width="50px">
+    </p>
+      </form>
+      <!--<div class="controls">
+	<button v-on:click="showAll()">Show All</button>
+	<button v-on:click="showActive()">Show Active</button>
+	<button v-on:click="showCompleted()">Show Completed</button>
+  <button v-on:click="deleteCompleted()">Delete Completed</button>
+  <button v-on:click="sortItems()">Sort by Priority</button> 
+      </div> -->
+      <ul>
+	<li v-for="item in filteredItems" draggable="true" v-on:dragstart="dragItem(item)" v-on:dragover.prevent v-on:drop="dropItem(item)">
+    <input type="checkbox" v-model="item.completed" v-on:click="completeItem(item)" />
+    <label v-bind:class="{ completed: item.completed }">{{ item.text }}</label>
+    <label v-bind:class="{ completed: item.completed }">{{ item.text1 }}</label>
+    <button v-on:click="upPriority(item)">Up</button>
+    <button v-on:click="downPriority(item)">Down</button>
+    {{ item.priority }}
+    <button v-on:click="deleteItem(item)" class="delete">X</button>
+	</li>
+      </ul>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js" integrity="sha256-pU9euBaEcVl8Gtg+FRYCtin2vKLN8sx5/4npZDmY2VA=" crossorigin="anonymous"></script>
+    <script src="/script.js"></script>
+    
+    <footer>
+      <a href="https://github.com/ahwang2008/CreativeProject4">GitHub Classroom Link</a>
+    </footer>
+  </body>
+</html>
